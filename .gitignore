@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+
+# production
+/build
+
+# misc
+.DS_Store
+
+/.idea
+node_modules
+/package-lock.json
