@@ -15,18 +15,22 @@ import {provideContext, cs, consumeContext} from "cs-react";
 
 export const RealWorldApp = () => cs(
     ["auth", (_, next) => Auth({next})],
-    ["apis", ({auth}, next) => next(createApis({
-        token: auth.user?.token,
-        onUnauthen: () => window.location.pathname = "/register",
-    }))],
+    ["apis", ({auth}, next) => Apis({auth, next})],
     ({apis}, next) => provideContext("apis", apis, next),
     ({auth}, next) => provideContext("auth", auth, next),
-    ({}) => (
+    ({}, next) => (
         <div className="realworld-app">
-            {Routes()}
+            {next()}
         </div>
-    )
+    ),
+    ({}) => Routes(),
 );
+
+const Apis = ({next, auth}) => next(createApis({
+    token: auth.user?.token,
+    onUnauthen: () => window.location.pathname = "/register",
+}));
+
 
 const Routes = () => cs(
     consumeContext("auth"),

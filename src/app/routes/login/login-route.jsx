@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {Layout} from "../common/layout";
-import {renderErrorsMessage} from "../common/render-errors-message";
+import {ErrorMessages} from "../common/error-messages";
 import {bindInput} from "../../../common/react/bind-input";
 import {cs, consumeContext, State} from "cs-react";
 import {scope} from "cs-react/utils";
@@ -23,7 +23,7 @@ export const LoginRoute = () => cs(
                             <Link to={"/register"}>Need an account?</Link>
                         </p>
 
-                        {renderErrorsMessage(loginErrors.value)}
+                        {ErrorMessages(loginErrors.value)}
 
                         <form>
                             {(() => {

@@ -3,7 +3,7 @@ import {Layout} from "../common/layout";
 import {bindInput} from "../../../common/react/bind-input";
 import {cs, State, consumeContext} from "cs-react";
 import {scope} from "cs-react/utils";
-import {renderErrorsMessage} from "../common/render-errors-message";
+import {ErrorMessages} from "../common/error-messages";
 import {Link} from "react-router-dom";
 
 export const RegisterRoute = () => cs(
@@ -23,7 +23,7 @@ export const RegisterRoute = () => cs(
                             <Link to={"/login"}>Have an account?</Link>
                         </p>
 
-                        {renderErrorsMessage(signupErrors.value)}
+                        {ErrorMessages(signupErrors.value)}
 
                         <form>
                             {(() => {

@@ -5,7 +5,7 @@ import {consumeContext, cs, State} from "cs-react";
 import {equalDeep, keepOnly} from "../../../common/utils/objects";
 import {bindInput} from "../../../common/react/bind-input";
 import {scope} from "cs-react/utils";
-import {renderErrorsMessage} from "../common/render-errors-message";
+import {ErrorMessages} from "../common/error-messages";
 import {cx} from "emotion";
 
 export const SettingsRoute = () => cs(
@@ -29,7 +29,7 @@ export const SettingsRoute = () => cs(
 
                     <div className="col-md-6 offset-md-3 col-xs-12">
                         <h1 className="text-xs-center">Your Settings</h1>
-                        {renderErrorsMessage(updateErrors.value)}
+                        {ErrorMessages(updateErrors.value)}
                         <form>
                             <fieldset>
                                 {(() => {
