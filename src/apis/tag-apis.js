@@ -1,7 +1,7 @@
 
-const createTagApis = (fetcher) => ({
+const TagApis = (fetcher) => ({
     getTags: () => {
         return fetcher.get("/tags").then((resp) => resp.tags);
     },
 });
-exports.createTagApis = createTagApis;
+exports.TagApis = TagApis;

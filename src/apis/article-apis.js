@@ -1,6 +1,6 @@
 const {apiAuthen} = require("./api-authen");
 
-const createArticleApis = (fetcher) => ({
+const ArticleApis = (fetcher) => ({
     getArticle: (slug) => {
         return fetcher.get(`/articles/${slug}`).then(({article}) => article);
     },
@@ -41,4 +41,4 @@ const createArticleApis = (fetcher) => ({
         return fetcher[favorite? "post":"delete"](`/articles/${articleSlug}/favorite`).then(({article}) => article);
     }),
 });
-exports.createArticleApis = createArticleApis;
+exports.ArticleApis = ArticleApis;

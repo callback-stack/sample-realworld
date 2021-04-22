@@ -1,6 +1,6 @@
 
 
-const createUserApis = (fetcher) => ({
+const UserApis = (fetcher) => ({
      register: ({email, password, username}) => {
          return fetcher.post("/users", {user: {email, password, username}});
      },
@@ -11,4 +11,4 @@ const createUserApis = (fetcher) => ({
          return fetcher.put("/user", {user});
      },
  });
-exports.createUserApis = createUserApis;
+exports.UserApis = UserApis;

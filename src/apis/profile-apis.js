@@ -1,6 +1,6 @@
 const {apiAuthen} = require("./api-authen");
 
-const createProfileApis = (fetcher) => ({
+const ProfileApis = (fetcher) => ({
     getProfile: (username) => {
         return fetcher.get(`/profiles/${username}`).then(({profile}) => profile);
     },
@@ -11,4 +11,4 @@ const createProfileApis = (fetcher) => ({
         return fetcher.delete(`/profiles/${username}/follow`).then(({profile}) => profile);
     }),
 });
-exports.createProfileApis = createProfileApis;
+exports.ProfileApis = ProfileApis;

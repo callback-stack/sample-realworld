@@ -1,15 +1,15 @@
-const {createUserApis} = require("./user-apis");
-const {createTagApis} = require("./tag-apis");
-const {createProfileApis} = require("./profile-apis");
-const {createArticleApis} = require("./article-apis");
+const {UserApis} = require("./user-apis");
+const {TagApis} = require("./tag-apis");
+const {ProfileApis} = require("./profile-apis");
+const {ArticleApis} = require("./article-apis");
 
 const createApis = (token) => {
     const fetcher = createFetcher(token);
     return ({
-        article: createArticleApis(fetcher),
-        profile: createProfileApis(fetcher),
-        tag: createTagApis(fetcher),
-        user: createUserApis(fetcher),
+        article: ArticleApis(fetcher),
+        profile: ProfileApis(fetcher),
+        tag: TagApis(fetcher),
+        user: UserApis(fetcher),
     });
 };
 exports.createApis = createApis;
