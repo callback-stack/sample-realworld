@@ -15,7 +15,11 @@ import {provideContext, cs, consumeContext} from "cs-react";
 
 export const RealWorldApp = () => cs(
     ["auth", (_, next) => Auth({next})],
-    ({auth}, next) => provideContext("apis", createApis(auth.user && auth.user.token), next),
+    ["apis", ({auth}, next) => next(createApis({
+        token: auth.user?.token,
+        onUnauthen: () => window.location.pathname = "/register",
+    }))],
+    ({apis}, next) => provideContext("apis", apis, next),
     ({auth}, next) => provideContext("auth", auth, next),
     ({}) => (
         <div className="realworld-app">
@@ -27,7 +31,7 @@ export const RealWorldApp = () => cs(
 const Routes = () => cs(
     consumeContext("auth"),
     ({auth: {user}}) => {
-        const requireAuthen = (comp) => user == null ? redirect("/") : comp;
+        const requireAuthen = (comp) => user == null ? redirect("/login") : comp;
         const requireUnauthen = (comp) => user != null ? redirect("/") : comp;
 
         return (

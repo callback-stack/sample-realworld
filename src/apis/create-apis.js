@@ -3,23 +3,31 @@ const {TagApis} = require("./tag-apis");
 const {ProfileApis} = require("./profile-apis");
 const {ArticleApis} = require("./article-apis");
 
-const createApis = (token) => {
-    const fetcher = createFetcher(token);
+const createApis = ({token, onUnauthen}) => {
+    const fetcher = createFetcher({token});
+
+    const wrapAuthApi = (apiFn) => token ? (
+        apiFn
+    ) : async () => {
+        onUnauthen();
+        return Promise.reject("Unauthorized api access");
+    };
+
     return ({
-        article: ArticleApis(fetcher),
-        profile: ProfileApis(fetcher),
-        tag: TagApis(fetcher),
-        user: UserApis(fetcher),
+        article: ArticleApis({fetcher, wrapAuthApi}),
+        profile: ProfileApis({fetcher, wrapAuthApi}),
+        tag: TagApis({fetcher}),
+        user: UserApis({fetcher}),
     });
 };
 exports.createApis = createApis;
 
 
-const createFetcher = (token) => {
+const createFetcher = ({token}) => {
 
     const urlModifier = (url) => `https://conduit.productionready.io/api${url}`;
 
-    let createHeaders = () => {
+    const createHeaders = () => {
         let headers = new Headers();
         if (token) {
             headers.append("authorization", `Token ${token}`);

@@ -1,6 +1,5 @@
-const {apiAuthen} = require("./api-authen");
 
-const ArticleApis = (fetcher) => ({
+const ArticleApis = ({fetcher, wrapAuthApi}) => ({
     getArticle: (slug) => {
         return fetcher.get(`/articles/${slug}`).then(({article}) => article);
     },
@@ -37,7 +36,7 @@ const ArticleApis = (fetcher) => ({
     deleteComment: (id, articleSlug) => {
         return fetcher.delete(`/articles/${articleSlug}/comments/${id}`);
     },
-    changeFavorite: apiAuthen((favorite, articleSlug) => {
+    changeFavorite: wrapAuthApi((favorite, articleSlug) => {
         return fetcher[favorite? "post":"delete"](`/articles/${articleSlug}/favorite`).then(({article}) => article);
     }),
 });

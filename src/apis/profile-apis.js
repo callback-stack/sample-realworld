@@ -1,13 +1,12 @@
-const {apiAuthen} = require("./api-authen");
 
-const ProfileApis = (fetcher) => ({
+const ProfileApis = ({fetcher, wrapAuthApi}) => ({
     getProfile: (username) => {
         return fetcher.get(`/profiles/${username}`).then(({profile}) => profile);
     },
-    follow: apiAuthen((username) => {
+    follow: wrapAuthApi((username) => {
         return fetcher.post(`/profiles/${username}/follow`).then(({profile}) => profile);
     }),
-    unfollow: apiAuthen((username) => {
+    unfollow: wrapAuthApi((username) => {
         return fetcher.delete(`/profiles/${username}/follow`).then(({profile}) => profile);
     }),
 });

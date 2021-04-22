@@ -1,5 +1,5 @@
 
-const TagApis = (fetcher) => ({
+const TagApis = ({fetcher}) => ({
     getTags: () => {
         return fetcher.get("/tags").then((resp) => resp.tags);
     },
