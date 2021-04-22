@@ -3,8 +3,6 @@ import {HomeRoute} from "./routes/home/home-route";
 import {Router, Route, Switch} from "react-router-dom";
 import {routerHistory} from "../common/router-history";
 import {Auth} from "./auth";
-import {consumeContext, provideContext} from "../common/react/context";
-import {cs} from "../common/react/chain-services";
 import {redirect} from "../common/react/redirect";
 import {LoginRoute} from "./routes/login/login-route";
 import {RegisterRoute} from "./routes/register/register-route";
@@ -13,11 +11,12 @@ import {SettingsRoute} from "./routes/settings/settings-route";
 import {ProfileRoute} from "./routes/profile/profile-route";
 import {ArticleRoute} from "./routes/article/article-route";
 import {createApis} from "../apis/create-apis";
+import {provideContext, cs, consumeContext} from "cs-react";
 
 export const RealWorldApp = () => cs(
     ["auth", (_, next) => Auth({next})],
-    ({auth}, next) => provideContext({apis: createApis(auth.user && auth.user.token)}, next),
-    ({auth}, next) => provideContext({auth}, next),
+    ({auth}, next) => provideContext("apis", createApis(auth.user && auth.user.token), next),
+    ({auth}, next) => provideContext("auth", auth, next),
     ({}) => (
         <div className="realworld-app">
             {Routes()}

@@ -1,18 +1,16 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {cs} from "../../../../common/react/chain-services";
-import {UseState} from "../../../../common/react/use-state";
-import {consumeContext} from "../../../../common/react/context";
+import {consumeContext, cs, State} from "cs-react";
 import {bindInput} from "../../../../common/react/bind-input";
 
 export const CommentForm = ({articleSlug, onPost}) => cs(
     consumeContext("auth"),
     consumeContext("apis"),
-    ["posting", (_, next) => UseState({
+    ["posting", (_, next) => State({
         initValue: false,
         next
     })],
-    ["body", (_, next) => UseState({next})],
+    ["body", (_, next) => State({next})],
     ({auth, posting, body, apis}) => {
         if (!auth.user) {
             return (

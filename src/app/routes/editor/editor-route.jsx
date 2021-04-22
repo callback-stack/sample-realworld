@@ -1,13 +1,10 @@
 import React, {Fragment} from "react";
-import {cs} from "../../../common/react/chain-services";
-import {Load} from "../../../common/react/load";
 import {Layout} from "../common/layout";
 import {bindInput} from "../../../common/react/bind-input";
-import {scope} from "../../../common/react/scope";
-import {UseState} from "../../../common/react/use-state";
 import {renderErrorsMessage} from "../common/render-errors-message";
 import {routerHistory} from "../../../common/router-history";
-import {consumeContext} from "../../../common/react/context";
+import {consumeContext, cs, Load, State} from "cs-react";
+import {scope} from "cs-react/utils";
 
 export const EditorRoute = ({match: {params: {slug}}}) => cs(
     consumeContext("apis"),
@@ -15,7 +12,7 @@ export const EditorRoute = ({match: {params: {slug}}}) => cs(
         fetch: () => slug ? apis.article.getArticle(slug) : {},
         next: (value, onChange) => next({value, onChange}),
     })],
-    ["editingErrors", (_, next) => UseState({next})],
+    ["editingErrors", (_, next) => State({next})],
     (_, next) => <Layout active="editor" windowTitle={slug || "Editor"}>{next()}</Layout>,
     ({article, editingErrors, apis}) => (
         <div className="editor-page">

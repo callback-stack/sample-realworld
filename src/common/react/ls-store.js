@@ -1,12 +1,10 @@
-const {createElement: h} = require("react");
-const {UseState} = require("./use-state");
 const {cLsJson} = require("./ls-json");
-const {cs} = require("./chain-services");
+const {cs, State} = require("cs-react");
 
 const rLsStore = (key, defaultValue) => {
     const lsJson = cLsJson(key);
     return (_, next) => cs(
-        ["v", (_, next) => h(UseState, {
+        ["v", (_, next) => State({
             getInitValue: () => lsJson.get() || defaultValue,
             next,
         })],

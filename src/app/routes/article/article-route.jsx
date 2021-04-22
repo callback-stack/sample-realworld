@@ -1,16 +1,14 @@
 import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
-import {cs} from "../../../common/react/chain-services";
-import {Load} from "../../../common/react/load";
 import {Layout} from "../common/layout";
 import {ArticleMeta} from "../common/article-meta";
 import {FollowButton} from "../common/follow-button";
-import {setPath} from "../../../common/utils/arr-path";
+import {setPath} from "cs-react/utils";
 import {FavoriteButton} from "../common/favorite-button";
 import {Markdown} from "./markdown";
 import {CommentBox} from "./comment-box/comment-box";
 import {LoadingPanel} from "../common/loading-panel";
-import {consumeContext} from "../../../common/react/context";
+import {consumeContext, cs, Load} from "cs-react";
 import {routerHistory} from "../../../common/router-history";
 
 export const ArticleRoute = ({match: {params: {slug}}}) => cs(

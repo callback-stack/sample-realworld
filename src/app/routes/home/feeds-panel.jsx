@@ -1,15 +1,13 @@
-import React, {Fragment} from "react";
-import {cs} from "../../../common/react/chain-services";
-import {UseState} from "../../../common/react/use-state";
+import * as React from "react";
 import {cx} from "emotion";
-import {consumeContext} from "../../../common/react/context";
+import {cs, State, consumeContext} from "cs-react";
 import {PagingArticlePreviewList} from "../common/paging-article-preview-list/paging-article-preview-list";
 
 export const FeedsPanel = ({chosenTag}) => cs(
     consumeContext("auth"),
     consumeContext("apis"),
-    ({auth, apis}) => {
-        const tabs = [
+    ({auth, apis}) => Tabs({
+        tabs: [
             auth.user && {
                 label: "Your Feed",
                 render: () => PagingArticlePreviewList({
@@ -34,13 +32,9 @@ export const FeedsPanel = ({chosenTag}) => cs(
                 }),
                 forced: true,
             }
-        ].filter(v => v);
-
-        return Tabs({
-            tabs,
-            onChangeTab: () => chosenTag.onChange(null)
-        })
-    }
+        ].filter(v=>v),
+        onChangeTab: () => chosenTag.onChange(null)
+    }),
 );
 
 const Tabs = ({tabs, onChangeTab}) => cs(
@@ -49,7 +43,7 @@ const Tabs = ({tabs, onChangeTab}) => cs(
         return next(forcedIndex > -1 ? forcedIndex : 0);
     }],
     ["selected", ({forced}, next) => (
-        UseState({
+        State({
             initValue: forced,
             next
         })

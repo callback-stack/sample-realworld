@@ -1,15 +1,11 @@
-import React, {Fragment, createElement as h} from "react";
-import {cs} from "../../../../common/react/chain-services";
-import {UseState} from "../../../../common/react/use-state";
+import * as React from "react";
 import {ArticlePreviewList} from "./article-preview-list";
 import {Pagination} from "./pagination";
-import {scope} from "../../../../common/react/scope";
-import {Invoke} from "../../../../common/react/invoke";
-import {Load2} from "cs-react";
-
+import {Load2, cs, State, Invoke} from "cs-react";
+import {scope} from "cs-react/utils";
 
 export const PagingArticlePreviewList = ({api}) => cs(
-    ["page", (_, next) => UseState({
+    ["page", (_, next) => State({
         initValue: 0,
         next,
     })],
@@ -43,14 +39,16 @@ export const PagingArticlePreviewList = ({api}) => cs(
 );
 
 const NotNull = ({value, next}) => cs(
-    ["buffer", (_, next) => h(UseState, {next})],
-    ({buffer}) => <Fragment>
+    ["buffer", (_, next) => State({next})],
+    ({buffer}) => <>
         {next(value == null ? buffer.value : value)}
 
         {value != null && value !== buffer.value && (
-            <Invoke fn={() => {
-                buffer.onChange(value);
-            }}/>
+            Invoke({
+                action: () => {
+                    buffer.onChange(value);
+                },
+            })
         )}
-    </Fragment>,
+    </>,
 );

@@ -1,12 +1,10 @@
 import React, {createElement as h} from "react";
 import {routerHistory} from "../../../common/router-history";
-import {cs} from "../../../common/react/chain-services";
 import {Layout} from "../common/layout";
-import {consumeContext} from "../../../common/react/context";
-import {UseState} from "../../../common/react/use-state";
+import {consumeContext, cs, State} from "cs-react";
 import {equalDeep, keepOnly} from "../../../common/utils/objects";
 import {bindInput} from "../../../common/react/bind-input";
-import {scope} from "../../../common/react/scope";
+import {scope} from "cs-react/utils";
 import {renderErrorsMessage} from "../common/render-errors-message";
 import {cx} from "emotion";
 
@@ -14,15 +12,15 @@ export const SettingsRoute = () => cs(
     consumeContext("auth"),
     consumeContext("apis"),
     ["oriUser", ({auth}, next) => next(keepOnly(auth.user, ["email", "username", "image", "bio"]))],
-    ["user", ({oriUser}, next) => UseState({
+    ["user", ({oriUser}, next) => State({
         initValue: oriUser,
         next
     })],
-    ["submitting", (_, next) => UseState({
+    ["submitting", (_, next) => State({
         initValue: false,
         next
     })],
-    ["updateErrors", (_, next) => UseState({next})],
+    ["updateErrors", (_, next) => State({next})],
     (_, next) => <Layout active="settings" windowTitle="Settings">{next()}</Layout>,
     ({auth, oriUser, user, updateErrors, submitting, apis}) => (
         <div className="settings-page">

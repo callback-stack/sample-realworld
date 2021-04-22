@@ -1,18 +1,16 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {cs} from "../../../common/react/chain-services";
 import {Layout} from "../common/layout";
 import {renderErrorsMessage} from "../common/render-errors-message";
 import {bindInput} from "../../../common/react/bind-input";
-import {scope} from "../../../common/react/scope";
-import {UseState} from "../../../common/react/use-state";
-import {consumeContext} from "../../../common/react/context";
+import {cs, consumeContext, State} from "cs-react";
+import {scope} from "cs-react/utils";
 
 export const LoginRoute = () => cs(
     consumeContext("auth"),
     consumeContext("apis"),
-    ["data", (_, next) => UseState({next})],
-    ["loginErrors", (_, next) => UseState({next})],
+    ["data", (_, next) => State({next})],
+    ["loginErrors", (_, next) => State({next})],
     (_, next) => <Layout active="login" windowTitle="Sign In">{next()}</Layout>,
     ({data, loginErrors, auth, apis}) => (
         <div className="auth-page sign-in">

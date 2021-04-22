@@ -1,5 +1,5 @@
 import React from "react";
-import {cs} from "../common/react/chain-services";
+import {cs} from "cs-react";
 import {apiAuthenConfig} from "../apis/api-authen";
 import {rLsStore} from "../common/react/ls-store";
 

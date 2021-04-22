@@ -1,11 +1,9 @@
 import React from "react";
 import {cx} from "emotion";
-import {cs} from "../../../common/react/chain-services";
-import {UseState} from "../../../common/react/use-state";
-import {consumeContext} from "../../../common/react/context";
+import {consumeContext, cs, State} from "cs-react";
 
 export const FavoriteButton = ({className, favorited, favoritesCount, articleSlug, onChange, long}) => cs(
-    ["loading", (_, next) => UseState({
+    ["loading", (_, next) => State({
         initValue: false,
         next
     })],

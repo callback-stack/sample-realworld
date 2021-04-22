@@ -1,14 +1,12 @@
 import React from "react";
-import {cs} from "../../../common/react/chain-services";
 import {Layout} from "../common/layout";
 import {TagsPanel} from "./tags-panel";
-import {consumeContext} from "../../../common/react/context";
-import {UseState} from "../../../common/react/use-state";
+import {cs, consumeContext, State} from "cs-react";
 import {FeedsPanel} from "./feeds-panel";
 
 export const HomeRoute = () => cs(
     consumeContext("auth"),
-    ["chosenTag", (_, next) => UseState({next})],
+    ["chosenTag", (_, next) => State({next})],
     (_, next) => <Layout active="home" windowTitle="Home">{next()}</Layout>,
     ({auth, chosenTag}) => (
         <div className="home-page">

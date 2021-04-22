@@ -1,7 +1,5 @@
 import React from "react";
-import {cs} from "../../../common/react/chain-services";
-import {consumeContext} from "../../../common/react/context";
-import {Load} from "cs-react";
+import {cs, Load, consumeContext} from "cs-react";
 
 export const TagsPanel = ({onAddTag}) => cs(
     consumeContext("apis"),

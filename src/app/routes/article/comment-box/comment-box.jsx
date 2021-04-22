@@ -1,9 +1,7 @@
 import React, {Fragment} from "react";
-import {cs} from "../../../../common/react/chain-services";
-import {Load} from "../../../../common/react/load";
 import {CommentForm} from "./comment-form";
 import {CommentCard} from "./comment-card";
-import {consumeContext} from "../../../../common/react/context";
+import {consumeContext, cs, Load} from "cs-react";
 
 export const CommentBox = ({articleSlug}) => cs(
     consumeContext("apis"),

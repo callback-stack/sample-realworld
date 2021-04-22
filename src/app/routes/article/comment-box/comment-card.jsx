@@ -1,7 +1,6 @@
 import React from "react";
-import {consumeContext} from "../../../../common/react/context";
+import {consumeContext, cs} from "cs-react";
 import {getDateString} from "../../common/get-date-string";
-import {cs} from "../../../../common/react/chain-services";
 import {Link} from "react-router-dom";
 
 export const CommentCard = ({comment, articleSlug, onDelete}) => cs(

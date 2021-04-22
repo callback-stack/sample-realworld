@@ -1,8 +1,7 @@
 import React, {Fragment} from "react";
 import {Link} from "react-router-dom";
 import {cx} from "emotion";
-import {cs} from "../../../common/react/chain-services";
-import {consumeContext} from "../../../common/react/context";
+import {consumeContext, cs} from "cs-react";
 import {WindowTitle} from "./window-title";
 
 export const Layout = ({active, children, windowTitle}) => cs(
