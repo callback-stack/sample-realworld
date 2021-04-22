@@ -8,15 +8,15 @@ import {FavoriteButton} from "../common/favorite-button";
 import {Markdown} from "./markdown";
 import {CommentBox} from "./comment-box/comment-box";
 import {LoadingPanel} from "../common/loading-panel";
-import {consumeContext, cs, Load} from "cs-react";
+import {consumeContext, cs, Load2} from "cs-react";
 import {routerHistory} from "../../../common/router-history";
 
 export const ArticleRoute = ({match: {params: {slug}}}) => cs(
     consumeContext("auth"),
     consumeContext("apis"),
-    ["article", ({apis}, next) => Load({
+    ["article", ({apis}, next) => Load2({
         fetch: () => apis.article.getArticle(slug),
-        next: (value, onChange) => next({value, onChange})
+        next,
     })],
     (_, next) => <Layout windowTitle={slug}>{next()}</Layout>,
     ({article, auth}) => (

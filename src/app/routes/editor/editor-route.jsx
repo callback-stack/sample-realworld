@@ -3,14 +3,14 @@ import {Layout} from "../common/layout";
 import {bindInput} from "../../../common/react/bind-input";
 import {renderErrorsMessage} from "../common/render-errors-message";
 import {routerHistory} from "../../../common/router-history";
-import {consumeContext, cs, Load, State} from "cs-react";
+import {consumeContext, cs, Load2, State} from "cs-react";
 import {scope} from "cs-react/utils";
 
 export const EditorRoute = ({match: {params: {slug}}}) => cs(
     consumeContext("apis"),
-    ["article", ({apis}, next) => Load({
+    ["article", ({apis}, next) => Load2({
         fetch: () => slug ? apis.article.getArticle(slug) : {},
-        next: (value, onChange) => next({value, onChange}),
+        next,
     })],
     ["editingErrors", (_, next) => State({next})],
     (_, next) => <Layout active="editor" windowTitle={slug || "Editor"}>{next()}</Layout>,
