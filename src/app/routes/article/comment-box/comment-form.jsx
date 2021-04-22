@@ -1,7 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {consumeContext, cs, State} from "cs-react";
-import {bindInput} from "../../../../common/react/bind-input";
+import {bindInput, consumeContext, cs, State} from "cs-react";
 
 export const CommentForm = ({articleSlug, onPost}) => cs(
     consumeContext("auth"),

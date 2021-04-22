@@ -1,9 +1,8 @@
 import React, {createElement as h} from "react";
 import {routerHistory} from "../../../common/router-history";
 import {Layout} from "../common/layout";
-import {consumeContext, cs, State} from "cs-react";
+import {consumeContext, bindInput, cs, State} from "cs-react";
 import {equalDeep, keepOnly} from "../../../common/utils/objects";
-import {bindInput} from "../../../common/react/bind-input";
 import {scope} from "cs-react/utils";
 import {ErrorMessages} from "../common/error-messages";
 import {cx} from "emotion";

@@ -1,9 +1,8 @@
 import React, {Fragment} from "react";
 import {Layout} from "../common/layout";
-import {bindInput} from "../../../common/react/bind-input";
 import {ErrorMessages} from "../common/error-messages";
 import {routerHistory} from "../../../common/router-history";
-import {consumeContext, cs, Load2, State} from "cs-react";
+import {bindInput, consumeContext, cs, Load2, State} from "cs-react";
 import {scope} from "cs-react/utils";
 
 export const EditorRoute = ({match: {params: {slug}}}) => cs(

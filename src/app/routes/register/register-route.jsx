@@ -1,7 +1,6 @@
 import * as React from "react";
 import {Layout} from "../common/layout";
-import {bindInput} from "../../../common/react/bind-input";
-import {cs, State, consumeContext} from "cs-react";
+import {cs, bindInput, State, consumeContext} from "cs-react";
 import {scope} from "cs-react/utils";
 import {ErrorMessages} from "../common/error-messages";
 import {Link} from "react-router-dom";

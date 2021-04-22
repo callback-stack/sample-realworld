@@ -2,8 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {Layout} from "../common/layout";
 import {ErrorMessages} from "../common/error-messages";
-import {bindInput} from "../../../common/react/bind-input";
-import {cs, consumeContext, State} from "cs-react";
+import {cs, consumeContext, State, bindInput} from "cs-react";
 import {scope} from "cs-react/utils";
 
 export const LoginRoute = () => cs(
