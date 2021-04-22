@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {Layout} from "../common/layout";
 import {ArticleMeta} from "../common/article-meta";
 import {FollowButton} from "../common/follow-button";
-import {setPath} from "cs-react/utils";
+import {scope} from "cs-react/utils";
 import {FavoriteButton} from "../common/favorite-button";
 import {Markdown} from "./markdown";
 import {CommentBox} from "./comment-box/comment-box";
@@ -24,13 +24,11 @@ export const ArticleRoute = ({match: {params: {slug}}}) => cs(
             <div className="banner">
                 <div className="container">
                     {!article.value ? (
-                        <LoadingPanel/>
-                    ) : (
-                        <Fragment>
-                            <h1>{article.value.title}</h1>
-                            {renderArticleMeta({article, username: auth.user?.username})}
-                        </Fragment>
-                    )}
+                        LoadingPanel({})
+                    ) : <>
+                        <h1>{article.value.title}</h1>
+                        {ArticleMeta1({article, username: auth.user?.username})}
+                    </>}
                 </div>
             </div>
 
@@ -38,7 +36,7 @@ export const ArticleRoute = ({match: {params: {slug}}}) => cs(
                 <div className="row article-content">
                     <div className="col-md-12">
                         {!article.value ? (
-                            <LoadingPanel/>
+                            LoadingPanel({})
                         ) : (
                             <Fragment>
                                 <Markdown value={article.value.body}/>
@@ -57,11 +55,11 @@ export const ArticleRoute = ({match: {params: {slug}}}) => cs(
                 <hr/>
 
                 {!article.value ? (
-                    <LoadingPanel/>
+                    LoadingPanel({})
                 ) : (
                     <Fragment>
                         <div className="article-actions">
-                            {renderArticleMeta({article, username: auth.user?.username})}
+                            {ArticleMeta1({article, username: auth.user?.username})}
                         </div>
 
                         <div className="row">
@@ -76,7 +74,7 @@ export const ArticleRoute = ({match: {params: {slug}}}) => cs(
     )
 );
 
-const renderArticleMeta = ({article, username}) => cs(
+const ArticleMeta1 = ({article, username}) => cs(
     consumeContext("apis"),
     ({apis}) => (
         ArticleMeta({
@@ -102,14 +100,14 @@ const renderArticleMeta = ({article, username}) => cs(
                     {FollowButton({
                         username: article.value.author.username,
                         following: article.value.author.following,
-                        onChange: (following) => article.onChange(setPath(article.value, ["author", "following"], following))
+                        onChange: (following) => scope(article, ["author", "following"]).onChange(following)
                     })}
                     &nbsp;&nbsp;
                     {FavoriteButton({
                         favorited:      article.value.favorited,
                         favoritesCount: article.value.favoritesCount,
                         articleSlug:    article.value.slug,
-                        onChange: ({favorited, favoritesCount}) => article.onChange({...article.value, favorited, favoritesCount}),
+                        onChange: ({favorited, favoritesCount}) => article.change((article1) => ({...article1, favorited, favoritesCount})),
                         long: true,
                     })}
                 </>
